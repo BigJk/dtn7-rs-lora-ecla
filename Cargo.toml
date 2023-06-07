@@ -1,0 +1,60 @@
+[package]
+name = "dtn7-rs-lora-ecla"
+authors = ["Daniel Schmidt <info@daniel-schmidt.de>"]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+keywords = ["peer2peer", "dtn", "lora"]
+exclude = [".vscode/", ".travis.yml", ".idea/"]
+readme = "README.md"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[dependencies]
+bp7 = {version = "0.10.5", default-features = false }
+dtn7-plus = {version = "0.7.0", default-features = false, features = ["client"] }
+clap = { version = "3.1.18", features = ["cargo", "derive"] }
+anyhow = "1.0.70"
+serde = { version = "1.0", features = ["derive"] }
+serde_cbor = "0.11"
+base64 = "0.13.0"
+humantime = "2.1.0"
+rand = "0.8.5"
+dtn7 = { git = "https://github.com/BigJk/dtn7-rs.git", rev = "153e083fcd5617aece609153d8755a76178002ee" }
+tokio = { version = "1.16.1", features = ["rt-multi-thread", "macros", "time", "sync", "process", "signal"] }
+tokio-util = { version = "0.7.2", features = ["codec"] }
+tokio-serde = { version = "0.8", features = ["json"] }
+parking_lot = { version = "0.12.0", features = ["send_guard"] }
+futures-util = "0.3.5"
+pretty_env_logger = "0.4.0"
+serde_json = "1.0"
+futures = "0.3.5"
+lazy_static = "1.4.0"
+tungstenite = "0.17.3"
+log = "0.4"
+serialport = "4.2.0"
+hex = "0.4.3"
+async-trait = "0.1.58"
+prost = "0.10"
+tokio-tungstenite = "0.17.2"
+prost-types = "0.10"
+bytes = "1.2.1"
+url = "2.3.1"
+reqwest = { version = "0.11.13", default-features = false, features = ["json"] }
+priority-queue = "1.3.0"
+prettytable-rs = "^0.10"
+strum = "0.24"
+strum_macros = "0.24"
+axum = "0.6.7"
+attohttpc = { version = "0.24.0", default-features = false, features = ["json"] }
+
+[build-dependencies]
+prost-build = "0.11.2"
+
+[lib]
+name = "lora_ecla"
+path = "src/lib.rs"

@@ -1,0 +1,1 @@
+include!(concat!(env!("OUT_DIR"), "/lora.protocol.rs"));
