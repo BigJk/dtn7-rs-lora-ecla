@@ -102,11 +102,26 @@ The system is split into different sub-systems called actors that all communicat
 
 ### random
 
-todo
+Naive baseline routing strategy that sends out bundles with a random priority.
+
+#### Settings
+
+- **SEND_INTERVAL**: The interval in which the strategy tries to send. (example values: 5s, 50s, 1m, 30m)
+- **ADVERTISE_INTERVAL**: The interval in which the strategy tries to advertise the node. (example values: 5s, 50s, 1m, 30m)
+- **SEND_PACKETS**: The number of packets to send when the SEND_INTERVAL is reached. (example values: 2, 5, 1)
+- **MIN_SCORE**: The minimum score for randomization. (example values: 0, 10, 100)
+- **MAX_SCORE**: The maximum score for randomization. Should be greater than ``MIN_SCORE``. (example values: 100, 200, 1000)
+- **MAX_PEER_AGE**: The maximum age in seconds to treat a node as present in the neighborhood. (example values: 10, 60, 600)
 
 ### quadrant
 
-todo
+Location-Aware routing strategy adopted from:
+
+```
+L. Baumgärtner, P. Lieser, J. Zobel, B. Bloessl, R. Steinmetz and M. Mezini,
+"LoRAgent: A DTN-based Location-aware Communication System using LoRa,"
+2020 IEEE Global Humanitarian Technology Conference (GHTC), Seattle, WA, USA, 2020, pp. 1-8, doi: 10.1109/GHTC46280.2020.9342886.
+```
 
 #### Settings
 
@@ -120,4 +135,7 @@ todo
 
 ## REST API
 
-todo
+There is a simple REST API present. It runs under the cli arg ``--webport <webport>``.
+
+- GET ``/close/:target``: Shuts the ``:target`` actor down
+- GET ``/config/:type``: Returns the config of ``ecla``, ``dtnd``, ``strategy``, ``lora``
