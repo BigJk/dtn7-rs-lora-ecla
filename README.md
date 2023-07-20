@@ -6,25 +6,31 @@
 LoRa ECLA 0.1.0
 Daniel Schmidt <info@daniel-schmidt.de>
 Configurable LoRa ECLA for dtn7-rs using Protocol Buffer overlay network.
-
 USAGE:
     loclad [OPTIONS]
 
 OPTIONS:
-    -c, --config <config>                      Specify config file
-        --create_config                        Writes default config to --config path
-    -d, --debug                                Set log level to debug
-        --dtnd <dtnd>                          
-        --dtnd_args <dtnd_args>                
-        --ecla_addr <ecla_addr>                
-        --ecla_module <ecla_module>            
-    -h, --help                                 Print help information
-        --lora_agent <lora_agent>              
-        --lora_arg <lora_arg>                  
-        --strategy_config <strategy_config>    
-        --strategy_name <strategy_name>        
-    -V, --version                              Print version information
-        --webport <webport>      
+        --airtime_band_width <airtime_band_width>
+        --airtime_coding_rate <airtime_scoding_rate>
+        --airtime_crc <airtime_crc>
+        --airtime_explicit_header <airtime_explicit_header>
+        --airtime_low_data <airtime_explicit_header>
+        --airtime_preamble_len <airtime_preamble_len>
+        --airtime_spreading_factor <airtime_spreading_factor>
+    -c, --config <config>                     Specify config file
+        --create_config                       Writes default config to --config path
+    -d, --debug                               Set log level to debug
+        --dtnd <dtnd>
+        --dtnd_args <dtnd_args>
+        --ecla_addr <ecla_addr>
+        --ecla_module <ecla_module>
+    -h, --help                                Print help information
+        --lora_agent <lora_agent>
+        --lora_arg <lora_arg>
+        --strategy_config <strategy_config>
+        --strategy_name <strategy_name>
+    -V, --version                             Print version information
+        --webport <webport>
 ```
 
 ## Example Config File
@@ -58,7 +64,18 @@ With the ``--config,-c`` argument a json encoded config file can be used. All ar
       "SEND_INTERVAL": "22s"
     }
   },
-  
+
+  // Airtime parameters for airtime approximation
+  "airtime": {
+    "preamble_len": 6.0,
+    "spreading_factor": 7.0,
+    "band_width": 125.0,
+    "coding_rate": 5.0,
+    "crc": true,
+    "explicit_header": true,
+    "low_data_rate_optimization": false
+  },
+
   // REST API webport (0 = disabled)
   "web_port": 7262
 }
@@ -132,6 +149,10 @@ L. Baumgärtner, P. Lieser, J. Zobel, B. Bloessl, R. Steinmetz and M. Mezini,
 - **SPREAD_PRIORITY**: The priority value that gets added for the spread. (example values: 5, 10, 0)
 - **SELF_FORWARD_PRIORITY**: The base priority of a packet that is received from the local DTND instance. (example values: 5, 10, 0)
 - **ADVERTISE_PRIORITY**: The base priority of the advertise packet. (example values: 5, 10, 0)
+
+## Airtime Calculation
+
+Airtime calculation is build in. If you setup the airtime parameters with identical values to your LoRa modem airtime information will be logged and can be used by routing strategies. To play around with the impact of the parameters see: [LoRa Airtime Caluclator](https://iftnt.github.io/lora-air-time/index.html).
 
 ## REST API
 
